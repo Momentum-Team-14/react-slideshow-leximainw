@@ -40,6 +40,18 @@ const App = () => {
             name: 'Year',
             fn: (a, b) => a.release_date - b.release_date,
         },
+        {
+            name: 'Rating',
+            fn: (a, b) => b.rt_score - a.rt_score,
+        },
+        {
+            name: 'Name',
+            fn: (a, b) => a.title.localeCompare(b.title),
+        },
+        {
+            name: 'Runtime',
+            fn: (a, b) => a.running_time - b.running_time,
+        },
     ]
     const nextSortMode = (sortMode + 1) % sortKinds.length
 
@@ -48,7 +60,8 @@ const App = () => {
             /*pageSize={10}*/
             slides={[...filmData]
                 .sort(sortKinds[sortMode].fn)
-                .map(film => <FilmDetail film={film}/>)}
+                .map(film => <FilmDetail key={film.title} film={film}/>)}
+            sortText={sortKinds[nextSortMode].text}
             sortBy={sortKinds[nextSortMode].name}
             onSort={() => setSortMode(nextSortMode)}
         />

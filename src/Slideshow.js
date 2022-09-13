@@ -1,26 +1,27 @@
 import {useState} from 'react'
 
-const Slideshow = ({slides}) => {
+const Slideshow = ({slides, pageSize=1}) => {
     const btnClasses = "btn btn-primary"
     const btnDisabled = btnClasses + " disabled"
-    const [currSlide, setCurrSlide] = useState(0)
-    const numSlides = slides.length
+    const [currPage, setCurrSlide] = useState(0)
+    const currIndex = currPage * pageSize
+    const numPages = Math.ceil(slides.length / pageSize)
     return (
         <div className="slides-app">
-            {(numSlides ? numSlides : '') && slides[currSlide]}
+            {(numPages ? numPages : '') && slides.slice(currIndex, currIndex + pageSize)}
             <div style={{display: 'flex', justifyContent: 'center', marginTop: '1rem'}}>
                 <div className="btn-group">
                     <button
-                        className={currSlide ? btnClasses : btnDisabled}
+                        className={currPage ? btnClasses : btnDisabled}
                         onClick={() => setCurrSlide(0)}
                     >Start Over</button>
                     <button
-                        className={currSlide ? btnClasses : btnDisabled}
-                        onClick={() => setCurrSlide(currSlide - 1)}
+                        className={currPage ? btnClasses : btnDisabled}
+                        onClick={() => setCurrSlide(currPage - 1)}
                     >Back</button>
                     <button
-                        className={currSlide < numSlides - 1 ? btnClasses : btnDisabled}
-                        onClick={() => setCurrSlide(currSlide + 1)}
+                        className={currPage < numPages - 1 ? btnClasses : btnDisabled}
+                        onClick={() => setCurrSlide(currPage + 1)}
                     >Next</button>
                 </div>
             </div>

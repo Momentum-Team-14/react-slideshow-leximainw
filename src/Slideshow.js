@@ -7,7 +7,7 @@ const Slideshow = ({slides, pageSize=1, sortBy='', onSort=undefined}) => {
     const currIndex = currPage * pageSize
     const numPages = Math.ceil(slides.length / pageSize)
     if (!onSort) {
-        onSort = () => {}
+        onSort = ''
     }
     return (
         <div className="slides-app">
@@ -26,10 +26,10 @@ const Slideshow = ({slides, pageSize=1, sortBy='', onSort=undefined}) => {
                         className={currPage < numPages - 1 ? btnClasses : btnDisabled}
                         onClick={() => setCurrSlide(currPage + 1)}
                     >Next</button>
-                    {sortBy && <button
+                    {onSort && <button
                         className={btnClasses}
                         onClick={onSort}
-                    >Sort by {sortBy}</button>}
+                    >Sort{sortBy ? ` by ${sortBy}` : ''}</button>}
                 </div>
             </div>
         </div>

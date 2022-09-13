@@ -30,10 +30,10 @@ const App = () => {
     }
 
     const sortKinds = [
-        {
-            text: 'Unsorted',
-            fn: (a, b) => 1,
-        },
+        // {
+        //     text: 'Unsorted',
+        //     fn: (a, b) => 1,
+        // },
         {
             name: 'Year',
             fn: (a, b) => a.release_date - b.release_date,
